@@ -1,0 +1,482 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+:root {
+    --primaryColor: #1DB954;
+    --secondaryColor: #1ED760;
+    --backgroundColor: #0A0A0A;
+    --cardColor: rgba(255, 255, 255, 0.1);
+    --textColor: #ffffff;
+    --dimTextColor: #b3b3b3;
+    --glassEffect: rgba(255, 255, 255, 0.15);
+    --shadowColor: rgba(0, 0, 0, 0.5);
+    --hoverEffect: rgba(255, 255, 255, 0.3);
+    --glowEffect: 0px 0px 15px rgba(29, 185, 84, 0.8);
+    --gradientBackground: linear-gradient(135deg, #1DB954, #0A0A0A);
+    --errorColor: #ff4d4d;
+    --successColor: #4dff4d;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background: var(--gradientBackground);
+    color: var(--textColor);
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    transition: background 0.5s ease;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 90%;
+    max-width: 600px;
+    gap: 20px;
+}
+
+/* Dark/Light Theme Toggle */
+.theme-toggle {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 24px;
+    color: var(--textColor);
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.theme-toggle:hover {
+    color: var(--primaryColor);
+}
+
+/* Dynamic Background Gradient */
+body.dark {
+    --backgroundColor: #0A0A0A;
+    --textColor: #ffffff;
+    --dimTextColor: #b3b3b3;
+    --gradientBackground: linear-gradient(135deg, #1DB954, #0A0A0A);
+}
+
+body.light {
+    --backgroundColor: #ffffff;
+    --textColor: #0A0A0A;
+    --dimTextColor: #666666;
+    --gradientBackground: linear-gradient(135deg, #1DB954, #ffffff);
+}
+
+/* Search Bar */
+.search-bar {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.search-bar input {
+    width: 100%;
+    padding: 10px 15px;
+    border-radius: 25px;
+    background: var(--glassEffect);
+    color: var(--textColor);
+    border: none;
+    outline: none;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    transition: box-shadow 0.3s ease;
+}
+
+.search-bar input:focus {
+    box-shadow: var(--glowEffect);
+}
+
+.search-bar input::placeholder {
+    color: var(--dimTextColor);
+}
+
+/* Favorites Section */
+.favorites-container {
+    display: none;
+    background: var(--glassEffect);
+    backdrop-filter: blur(15px);
+    padding: 20px;
+    border-radius: 15px;
+    margin-top: 20px;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.favorites-container.active {
+    display: block;
+}
+
+.favorites-btn {
+    font-size: 24px;
+    color: var(--dimTextColor);
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.favorites-btn:hover {
+    color: var(--primaryColor);
+}
+
+/* Recently Played Section */
+.recently-played-container {
+    display: none;
+    background: var(--glassEffect);
+    backdrop-filter: blur(15px);
+    padding: 20px;
+    border-radius: 15px;
+    margin-top: 20px;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.recently-played-container.active {
+    display: block;
+}
+
+.recently-played-btn {
+    font-size: 24px;
+    color: var(--dimTextColor);
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.recently-played-btn:hover {
+    color: var(--primaryColor);
+}
+
+/* User Profile Integration */
+.user-profile {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.user-profile img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.user-profile img:hover {
+    transform: scale(1.1);
+}
+
+.user-profile span {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--textColor);
+}
+
+/* Playlist Sorting */
+.sort-options {
+    margin-top: 15px;
+}
+
+.sort-options select {
+    padding: 8px 12px;
+    border-radius: 25px;
+    background: var(--glassEffect);
+    color: var(--textColor);
+    border: none;
+    outline: none;
+    font-family: 'Poppins', sans-serif;
+    cursor: pointer;
+    transition: box-shadow 0.3s ease;
+}
+
+.sort-options select:focus {
+    box-shadow: var(--glowEffect);
+}
+
+/* Music Player Container */
+.music-Container {
+    background: var(--glassEffect);
+    backdrop-filter: blur(15px);
+    width: 100%;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0px 4px 15px var(--shadowColor);
+    text-align: center;
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.music-Container:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 8px 25px var(--shadowColor);
+}
+
+.music-Head-Name {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.music-Artist-Name {
+    font-size: 1.1rem;
+    color: var(--dimTextColor);
+    margin-bottom: 20px;
+}
+
+#songAvatar {
+    width: 260px;
+    height: 260px;
+    border-radius: 20px;
+    margin: 20px 0;
+    box-shadow: 0px 6px 20px var(--shadowColor);
+    transition: transform 0.4s ease-in-out, box-shadow 0.4s;
+}
+
+#songAvatar:hover {
+    transform: scale(1.1);
+    box-shadow: var(--glowEffect);
+}
+
+.musicTimerDiv {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+    color: var(--dimTextColor);
+    margin-bottom: 10px;
+}
+
+.musicProgressBar {
+    width: 100%;
+    height: 8px;
+    border-radius: 5px;
+    appearance: none;
+    background: var(--dimTextColor);
+    outline: none;
+    transition: background 0.3s ease;
+}
+
+.musicProgressBar::-webkit-slider-thumb {
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    background: var(--primaryColor);
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: var(--glowEffect);
+}
+
+.musicProgressBar:hover {
+    background: var(--hoverEffect);
+}
+
+.controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    margin-top: 15px;
+}
+
+.playBtn {
+    font-size: 40px;
+    color: var(--textColor);
+    cursor: pointer;
+    transition: 0.3s;
+    padding: 15px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: var(--glowEffect);
+}
+
+.playBtn:hover {
+    color: var(--primaryColor);
+    transform: scale(1.1);
+    box-shadow: 0px 0px 20px var(--primaryColor);
+}
+
+.musicControler {
+    font-size: 30px;
+    color: var(--textColor);
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.musicControler:hover {
+    color: var(--primaryColor);
+}
+
+.musicPlaylist {
+    width: 100%;
+    background: var(--glassEffect);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0px 4px 10px var(--shadowColor);
+    margin-top: 20px;
+    overflow-y: auto;
+    max-height: 320px;
+}
+
+.playlistItem {
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    border-radius: 12px;
+    transition: background 0.3s, transform 0.2s;
+    cursor: pointer;
+}
+
+.playlistItem:hover {
+    background: var(--hoverEffect);
+    transform: scale(1.02);
+}
+
+.playlistItem img {
+    width: 60px;
+    height: 60px;
+    border-radius: 10px;
+    margin-right: 15px;
+}
+
+.trackInfo {
+    flex: 1;
+}
+
+.trackTitle {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--textColor);
+}
+
+.trackArtist {
+    font-size: 0.85rem;
+    color: var(--dimTextColor);
+}
+
+.shuffleBtn, .repeatBtn {
+    font-size: 28px;
+    color: var(--dimTextColor);
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.shuffleBtn:hover, .repeatBtn:hover {
+    color: var(--secondaryColor);
+}
+
+.volumeControl {
+    width: 120px;
+    appearance: none;
+    background: var(--dimTextColor);
+    border-radius: 5px;
+    height: 6px;
+    outline: none;
+    margin-top: 10px;
+    transition: background 0.3s ease;
+}
+
+.volumeControl::-webkit-slider-thumb {
+    appearance: none;
+    width: 14px;
+    height: 14px;
+    background: var(--primaryColor);
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: var(--glowEffect);
+}
+
+.volumeControl:hover {
+    background: var(--hoverEffect);
+}
+
+.equalizer {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    margin-top: 15px;
+}
+
+.equalizer div {
+    width: 7px;
+    height: 30px;
+    background: var(--primaryColor);
+    animation: bounce 1.5s infinite ease-in-out alternate;
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: scaleY(1);
+    }
+    50% {
+        transform: scaleY(2);
+    }
+}
+
+/* New Styles for Notifications */
+.notification {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: var(--glassEffect);
+    backdrop-filter: blur(15px);
+    padding: 15px 20px;
+    border-radius: 10px;
+    color: var(--textColor);
+    font-size: 0.9rem;
+    box-shadow: 0px 4px 10px var(--shadowColor);
+    display: none;
+    z-index: 1000;
+}
+
+.notification.success {
+    background: var(--successColor);
+}
+
+.notification.error {
+    background: var(--errorColor);
+}
+
+.notification.active {
+    display: block;
+    animation: slideIn 0.5s ease;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+/* Style for the background video */
+#background-video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures the video covers the full screen */
+    z-index: -1; /* Makes sure the video stays behind your content */
+    opacity: 0.6; /* Optional: Adjust the opacity of the video for effect */
+}
+
+/* Make sure the rest of the content is in front of the video */
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background: var(--gradientBackground); /* Fallback gradient */
+    color: var(--textColor);
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    transition: background 0.5s ease;
+    position: relative;
+}
